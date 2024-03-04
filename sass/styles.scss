@@ -1,0 +1,85 @@
+@font-face {
+    font-family: 'Vollkorn SC';
+    font-style: normal;
+    font-weight: 400;
+    src: url("./../lib/fonts/VollkornSC-Regular.ttf");
+}
+
+// -------------------------------------------- mixins
+@mixin apply-flex($direction:row, $main-align:flex-start, $cross-align:flex-start, $wrap:nowrap) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $main-align;
+    align-items: $cross-align;
+    flex-wrap: $wrap;
+}
+
+// ------------------------------------- global styling
+html {
+    height:100%;
+    overflow-y: scroll;
+}
+
+a {
+    font-size:0.85rem;
+    text-decoration: none;
+    color:rgb(42, 128, 213);
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.g-base {
+    padding:0;
+    margin:0;
+    height:100%;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+	background-color: #FFFFFF;
+	color: #474747;
+}
+
+.g-tooltip {
+    font-size: 1rem;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+// -------------------------------------- page / section styling
+#p-main {
+    padding:30px;
+    @include apply-flex(row, flex-start, flex-start, wrap);
+}
+
+#p-main #s-content { 
+    width: 600px;
+    flex-grow:4;
+}
+
+#p-main #s-content #map {
+    width:100%;
+    height: 800px;
+    border-radius: 5px;
+    max-width:800px;
+}
+
+#p-main #s-aside {
+    width: 200px;
+    padding-right: 20px;
+    flex-grow:1;
+}
+
+#p-main #s-aside .title {
+    font-family: "Vollkorn SC";
+    font-size:1.75rem;
+    margin-bottom:10px;
+}
+
+#p-main #s-aside .caption {
+    margin-bottom:10px;
+}
+
+#p-main #s-aside img {
+    float: left;
+    padding-right:10px;
+}
