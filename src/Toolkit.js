@@ -2,7 +2,7 @@
 // arguments :
 // low : number - the lowest number in the range
 // high : number - the highest number in the range
-function getRandom(low=1, high=10) {
+export function getRandom(low=1, high=10) {
     let randomNumber;
     // calculate random number
     randomNumber = Math.round(Math.random() * (high - low)) + low;
@@ -14,7 +14,7 @@ function getRandom(low=1, high=10) {
 // arguments :
 // functionToCall : function - the function to call when the key is pressed
 // keyToDetect : string - the key to detect
-function addKey(functionToCall, keyToDetect = "Enter") {
+export function addKey(functionToCall, keyToDetect = "Enter") {
     document.addEventListener("keydown", (e) => {
         // is the key released the specified key?
         if (e.code === keyToDetect) {
@@ -29,13 +29,40 @@ function addKey(functionToCall, keyToDetect = "Enter") {
     });
 }
 
+// caches all images in the browser and runs a function when complete
+// arguments :
+// imageFilenames : array - the array of image filenames to load
+// path : string - the path to the images in the project folder
+// callback : function - the function to call when all images are loaded (optional)
+let loadedCount, images;
+export function cacheImages(imageFilenames, path, callback) {
+    // initialization
+    loadedCount = 0;
+    images = [];
+
+    // loop through array of image filenames
+    for (let filename of imageFilenames) {
+        // construct Image object and listen for when loaded
+        let image = new Image();
+        image.addEventListener("load", (e) => {
+            loadedCount++;
+            if (loadedCount >= imageFilenames.length) {
+                if (callback) callback();
+            }
+        });
+        image.src = path + filename;
+        // save image in array so browser "caches" the image
+        images.push(image);
+    }
+}
+
 // retrieves JSON data from a URL and runs a function when the data is retrieved, passing along the JSON data as an argument
 // arguments :
 // retrieveURL : string - the URL to retrieve the JSON data from
 // success : function - the function to call when the data is retrieved
 // failure : function - the function to call when the data is not retrieved and an error occurs
 // debug : boolean - whether to throw an error if one occurs (default is set to true)
-function getJSONData(retrieveURL, success, failure, debug = true) {
+export function getJSONData(retrieveURL, success, failure, debug = true) {
     fetch(retrieveURL)
         .then(response => response.json())
         .then(data => success(data))
@@ -43,9 +70,16 @@ function getJSONData(retrieveURL, success, failure, debug = true) {
             failure(error);
             if (debug) throw error;
         });
-} 
+}
 
-function sendJSONData(sendURL, sendJSON, success, failure, debug = false) {
+// sends JSON data to a URL and runs a function when a response is received
+// arguments :
+// sendURL : string - the URL to send the JSON data to
+// sendJSON : object - the JSON data to send
+// success : function - the function to call when a response is received
+// failure : function - the function to call when the response is not received and an error occurs
+// debug : boolean - whether to throw an error if one occurs (default is set to true)
+export function sendJSONData(sendURL, sendJSON, success, failure, debug = true) {
     fetch(sendURL,
         {
             method: "POST",
@@ -59,5 +93,3 @@ function sendJSONData(sendURL, sendJSON, success, failure, debug = false) {
             if (debug) throw error;
         });
 }
-
-export { getRandom, addKey, getJSONData, sendJSONData };

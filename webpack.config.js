@@ -12,8 +12,7 @@ module.exports = {
     // where all bundled JS/CSS will go (filename and path (made out of current directory/build))
     output: {
         filename: "bundle.js",
-        path: path.join(__dirname, "build"),
-        publicPath: '/'
+        path: path.join(__dirname, "build")
     },
     // when errors occur in browser, it shows the error in the JS and not in the transpiled bundle.js
     devtool: 'nosources-source-map',

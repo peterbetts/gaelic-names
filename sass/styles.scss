@@ -6,7 +6,7 @@
 }
 
 // -------------------------------------------- mixins
-@mixin apply-flex($direction:row, $main-align:flex-start, $cross-align:flex-start, $wrap:nowrap) {
+@mixin apply-flex($direction:row, $main-align:start, $cross-align:start, $wrap:nowrap) {
     display: flex;
     flex-direction: $direction;
     justify-content: $main-align;
@@ -48,7 +48,7 @@ a {
 // -------------------------------------- page / section styling
 #p-main {
     padding:30px;
-    @include apply-flex(row, flex-start, flex-start, wrap);
+    @include apply-flex(row, start, start, wrap);
 }
 
 #p-main #s-content { 
