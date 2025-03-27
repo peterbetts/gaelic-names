@@ -1,7 +1,7 @@
 {
   "name": "webpack-boilerplate-project",
   "version": "1.0.0",
-  "homepage": "https://[your username here].github.io/[name of github repo]",
+  "homepage": "https://peterbetts.github.io/gaelic-names",
   "description": "",
   "main": "main.js",
   "scripts": {
